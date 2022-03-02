@@ -13,23 +13,25 @@ namespace AnyDesk_IP_Grabber
 
         static void Main()
         {
-
-
+            Console.WriteLine("Getting connections");
+            //Get all connections and convert them to the Connection Object (created by me)
             Connection.GetConnections();
 
-            foreach(var connection in Connection.connections)
+            Console.WriteLine("Done, searching for anydesk connection.");
+
+            foreach (var connection in Connection.connections)
             {
                 if (connection.name.ToLower().Contains("anydesk"))
                 {
 
                     //Filters:
-                    if(connection.remoteport == "443")
+                    if(connection.remoteport.ToString() != "443")
                     {
-                        //return;
+                        Console.WriteLine("---\nGot Connection\n" + "process: " + connection.pid + "\nremote address: " + connection.remoteaddy + "\nport: " + connection.remoteport + "\nProcess Name: " + connection.name+ "\n---");
+
                     }
 
 
-                    Console.WriteLine("---\nGot Connection\n" + "process: "+ connection.pid + "\nremote address: " + connection.remoteaddy + "\nport: " + connection.remoteport + "\n---");
 
 
 
@@ -43,6 +45,14 @@ namespace AnyDesk_IP_Grabber
 
         }
     }
+
+
+
+
+
+
+
+
 
     public class Connection
     {
